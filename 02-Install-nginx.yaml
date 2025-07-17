@@ -1,0 +1,17 @@
+- name: install and run nginx
+  hosts: web # web server details getting from inventory.ini file, make sure we have proper IP for web server in inventory.ini file
+  become: yes
+  tasks:
+  - name: install nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: latest
+  - name: Enable and Start nginx
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+
+
+# execute the aboce script after pulling the code to server
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 02-install-nginx.yaml

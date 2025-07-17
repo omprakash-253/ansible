@@ -1,0 +1,6 @@
+- name: variable from inventory
+  hosts: localhost
+  tasks:
+  - name: taking variables from inventory
+    ansible.builtin.debug:
+      mas: "Hi we are learning {{Course}} from trainser{{Trainer}}, Duration is {{Duration}}."

@@ -1,0 +1,135 @@
+- name: ping the server
+  hosts: localhost
+  tasks: 
+  - name: pinging the server
+    ansible.builtin.ping: 
+
+
+
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 01-ping.yaml
+
+- name: Install nginx server
+  hosts: localhost
+  become: yes
+  tasks:
+  - name: Install nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: latest
+  - name: start and enable nginx service
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible-password=DevOps321 02-install-nginx.yaml
+
+#Save below code as 03-multiplay.yaml
+- name: PLAY-1 
+  hosts: localhost
+  tasks:
+  - name: "Play-1 task-1"
+    ansible.builtin.debug:
+      msg: "From PLAY1 and task1"
+
+- name: PLAY-2
+  hosts: localhost
+  tasks:
+  - name: "Play2 task-1"
+    ansible.builtin.debug:
+      msg: "From play-2 task-1"
+
+# asnible-playbook -i inventory.ini -e ansible_user:ec2-user ansible_password:DevOps321 03-multiplay.yaml
+
+# 04-variables.yaml
+
+- name: variables
+  hosts: localhost
+  vars:
+    person: "omprakash"
+    designation: "Tech Lead"
+    domain: "Dev-Ops"
+    company: "CGI"
+  tasks:
+  - name: 
+    ansible.builtin.debug:
+      msg: "{{person}} having a designation {{designation}} and working as {{domain}} engineer at {{company}}."
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user ansible_password:DevOps321 04-variables.yaml
+
+#05-vars-task:yaml
+
+- name: task varivables
+  hosts: localhost
+  vars:
+    person: "omprakash"
+    designation: "Tech Lead"
+    domain: "Dev-Ops"
+    company: "CGI"
+  tasks:
+  - name: declare and take the variables from task level
+    vars:
+      person: "asha"
+      domain: ".net with cloud"
+      company: "EVRY"
+    ansible.builtin.debug:
+      msg: "{{person}} having a designation {{designation}} and working as {{domain}} engineer at {{company}}."
+
+# above command will take the task-level varivales enventhough declared on playbook level, only designation it takes from playbooklevel as its not declared under task level.
+# ansible-playbook -i inventory.ini ansible_user:ec2-user -e ansible_password:DevOps321 05-vars-task.yaml
+
+#06-vars-files
+
+- name: variables from file
+  hosts: localhost
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: Print the message by taking variables from vars file.
+    ansible.builtin.debug:
+      msg: "I'm learning {{COURSE}} course from trainer {{TRAINER}}, course duration is {{DURATION}}."
+
+      
+#07-vars-prompt
+
+- name: variables from prompt
+  hosts: localhost
+  vars_prompt:
+  - name: USER
+    prompt: "Please enter the user name"
+    private: false
+  - name: PASSWORD
+    prompt: Please enter the password
+    private: true
+  tasks:
+  - name: taking the variables from prompt
+    ansible.builtin.debug:
+      msg: "Hi username is {{USER}} and password is {{PASSWORD}}"
+
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 07-vars-prompt.yaml
+
+# 08-vars-inventory.yaml
+
+- name: variables from inventory
+  hosts: localhost
+  tasks:
+  - name: taking the variables from inventory
+    ansible.builtin.debug:
+      msg: "I'm learning {{COURSE}} course from trainer {{TRAINER}}, course duration is {{DURATION}}."
+
+# above script will get the varialbes for [localhost:vars] from inventory.ini
+# ansible-playbook -i inventory.ini -e ansible-user:ec2-user -e ansible-password:DevOps321 08-vars-inventory.yaml 
+
+# 09-vars-args.yaml
+
+- name: Variables through arguments
+  hosts: localhost
+  tasks:
+  - name: Variables from arguments
+    ansible.builtin.debug:
+      msg: "Hello {{PERSON}}, Good {{WISHES}}."
+
+#ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 -e "PERSON=omprakash WISHES=Morning"
+
+#ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 -e PERSON=omprakash -e WISHES=Morning
+
+

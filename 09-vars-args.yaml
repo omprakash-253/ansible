@@ -1,0 +1,11 @@
+- name: variables from arguments
+  hots: localhost
+  tasks:
+  - name: Pass variables through arguments
+    ansible.builtin.debug:
+      msg: "Hello {{PERSON}}, good {{WISHES}}."
+
+
+# Execute the aboce script by passing arguments while executing the script by typing -e or --etra-vars.
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user ansible_password:DevOps321 09-vars-args.yaml -e "PERSON=Ramesh WISHES=Morning"
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user ansible_password:DevOps321 09-vars-args.yaml -e PERSON=Ramesh -e WISHES=Morning
