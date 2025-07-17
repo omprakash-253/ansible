@@ -1,0 +1,9 @@
+- name: ping the server
+  hosts: web # # web server details getting from inventory.ini file, make sure we have proper IP for web server in inventory.ini file
+  tasks: # list of tasks/modules/collections
+    - name: pinging the server
+      ansible.builtin.ping:
+
+
+# execute the aboce script after pulling the code to server
+# ansible-playbook -i inventory.ini -e ansible_user:ec2-user -e ansible_password:DevOps321 01-ping.yaml
