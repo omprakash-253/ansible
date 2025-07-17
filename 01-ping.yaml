@@ -1,5 +1,5 @@
 - name: ping the server
-  hosts: web # # web server details getting from inventory.ini file, make sure we have proper IP for web server in inventory.ini file
+  hosts: db # # web server details getting from inventory.ini file, make sure we have proper IP for web server in inventory.ini file
   tasks: # list of tasks/modules/collections
     - name: pinging the server
       ansible.builtin.ping:
