@@ -3,4 +3,4 @@
   tasks:
   - name: taking variables from inventory
     ansible.builtin.debug:
-      msg: "Hi we are learning {{COURSE}} from trainser{{TRAINER}}, Duration is {{DURATION}}."
+      msg: "Hi we are learning {{COURSE}} from trainser {{TRAINER}}, Duration is {{DURATION}}."
