@@ -9,8 +9,8 @@
     vars:   # since we are declaring the valiables under task, this will override the valirables declared under playbook level
       Course: "Devops"
     ansible.builtin.debug:
-      msg: "Hi, we are learning {{Cource}} from Trainer {{Trainer}}, Duration is {{Duration}}" # Cource valuse is getting from task level.
+      msg: "Hi, we are learning {{Course}} from Trainer {{Trainer}}, Duration is {{Duration}}" # Cource valuse is getting from task level.
 
   - name: print inherent information
     ansible.builtin.debug:
-      msg: "Hi, we are learning {{Cource}} from Trainer {{Trainer}}, Duration is {{Duration}}" # this will get variable values from playbook level
+      msg: "Hi, we are learning {{Course}} from Trainer {{Trainer}}, Duration is {{Duration}}" # this will get variable values from playbook level
