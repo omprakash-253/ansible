@@ -5,5 +5,5 @@
   tasks:
   - name: get varibales from file
     ansible.builtin.debug:
-      msg: "Hi learning {{Course}} from Trainer {{Trainer}}, Duration is {{Duration}}."
+      msg: "Hi learning {{COURSE}} from Trainer {{TRAINER}}, Duration is {{DURATION}}."
   
